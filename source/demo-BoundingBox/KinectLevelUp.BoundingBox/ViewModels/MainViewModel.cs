@@ -1,8 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
-using KinectLevelUp.MvvmDemo.Services;
+using System.Windows.Input;
+using KinectLevelUp.BoundingBox.Services;
+using KinectLevelUp.BoundingBox.Views;
 
-namespace KinectLevelUp.MvvmDemo.ViewModels
+namespace KinectLevelUp.BoundingBox.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {
@@ -14,12 +16,16 @@ namespace KinectLevelUp.MvvmDemo.ViewModels
         {
             this.kinectService = kinectService;
             kinectService.SkeletonUpdated += new EventHandler<SkeletonUpdatedEventArgs>(kinectService_SkeletonUpdated);
+            this.ShowBoundingBoxCommand = new RelayCommand(this.ExecuteShowBoundingBox);
         }
 
         void kinectService_SkeletonUpdated(object sender, SkeletonUpdatedEventArgs e)
         {
-            this.OffsetX = e.HandRightJoint.Position.X * Scale;
-            this.OffsetY = e.HandRightJoint.Position.Y * -Scale;
+            if (this.kinectService.UserIsInRange)
+            {
+                this.OffsetX = e.HandRight.Position.X * Scale;
+                this.OffsetY = e.HandRight.Position.Y * -Scale;
+            }
         }
 
         const string OffsetXProperty = "OffsetX";
@@ -44,6 +50,16 @@ namespace KinectLevelUp.MvvmDemo.ViewModels
                 this.offsetY = value;
                 this.OnPropertyChanged(OffsetYProperty);
             }
+        }
+
+        public ICommand ShowBoundingBoxCommand { get; private set; }
+
+        void ExecuteShowBoundingBox()
+        {
+            App.Current.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                new BoundingBoxView().Show();
+            }));
         }
 
         void OnPropertyChanged(string propertyName)
