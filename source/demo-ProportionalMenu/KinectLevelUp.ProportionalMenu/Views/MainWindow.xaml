@@ -1,0 +1,31 @@
+﻿<Window x:Class="KinectLevelUp.ProportionalMenu.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        DataContext="{Binding Main, Source={StaticResource Locator}}"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid
+            Background="#EEEEEE"
+            Width="200"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Stretch">
+            <ItemsControl
+                VerticalAlignment="Center"
+                ItemsSource="{Binding MenuItems}"
+                Margin="10">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border
+                            Background="{Binding ItemBrush}"
+                            CornerRadius="10"
+                            Margin="10"
+                            Padding="10">
+                            <Button 
+                                Content="{Binding Name}"/>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+    </Grid>
+</Window>
