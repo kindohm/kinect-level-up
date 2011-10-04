@@ -1,13 +1,17 @@
 ﻿
+using KinectLevelUp.CustomSwipe.Services;
 namespace KinectLevelUp.CustomSwipe.ViewModel
 {
     public class ViewModelLoader
     {
+        static IKinectService kinectService;
         static MainViewModel main;
 
         public ViewModelLoader()
         {
-            main = new MainViewModel();
+            kinectService = new KinectService();
+
+            main = new MainViewModel(kinectService);
         }
 
         public MainViewModel Main
@@ -17,6 +21,7 @@ namespace KinectLevelUp.CustomSwipe.ViewModel
 
         public static void Cleanup()
         {
+            kinectService.Cleanup();
             main.Cleanup();
         }
     }

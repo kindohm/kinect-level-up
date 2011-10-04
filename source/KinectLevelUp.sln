@@ -13,6 +13,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "demo-BoundingBoxDebugVideo"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KinectLevelUp.BoundingBox", "demo-BoundingBoxDebugVideo\KinectLevelUp.BoundingBox\KinectLevelUp.BoundingBox.csproj", "{FB71E92F-13E7-45F3-9ABD-1DCBD463DA8B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "demo-CustomSwipe", "demo-CustomSwipe", "{731CFF52-9BB5-454C-9D86-AD972A47307C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KinectLevelUp.CustomSwipe", "demo-CustomSwipe\KinectLevelUp.CustomSwipe\KinectLevelUp.CustomSwipe.csproj", "{1939C96F-64A2-4338-BC4B-96A6512D867E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -31,6 +35,10 @@ Global
 		{FB71E92F-13E7-45F3-9ABD-1DCBD463DA8B}.Debug|x86.Build.0 = Debug|x86
 		{FB71E92F-13E7-45F3-9ABD-1DCBD463DA8B}.Release|x86.ActiveCfg = Release|x86
 		{FB71E92F-13E7-45F3-9ABD-1DCBD463DA8B}.Release|x86.Build.0 = Release|x86
+		{1939C96F-64A2-4338-BC4B-96A6512D867E}.Debug|x86.ActiveCfg = Debug|x86
+		{1939C96F-64A2-4338-BC4B-96A6512D867E}.Debug|x86.Build.0 = Debug|x86
+		{1939C96F-64A2-4338-BC4B-96A6512D867E}.Release|x86.ActiveCfg = Release|x86
+		{1939C96F-64A2-4338-BC4B-96A6512D867E}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,5 +47,6 @@ Global
 		{6F9B77EB-7E89-4B94-A510-A8A9FD4AFA25} = {918BF16D-C6CE-48E5-AA88-3FDAA1E892EE}
 		{E3DE1070-AD86-4878-A376-00E8730DE471} = {557B3FE4-8C02-4672-8BAC-42B8C9996586}
 		{FB71E92F-13E7-45F3-9ABD-1DCBD463DA8B} = {C1511B61-D5CD-4E45-A092-589C2025487A}
+		{1939C96F-64A2-4338-BC4B-96A6512D867E} = {731CFF52-9BB5-454C-9D86-AD972A47307C}
 	EndGlobalSection
 EndGlobal
