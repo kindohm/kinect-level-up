@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using KinectLevelUp.CustomSwipe.Infrastructure;
 using KinectLevelUp.CustomSwipe.Views;
+using System.Diagnostics;
 
 namespace KinectLevelUp.CustomSwipe.Controls
 {
@@ -27,11 +28,19 @@ namespace KinectLevelUp.CustomSwipe.Controls
 
         void TransitionFrame_Navigating(object sender, NavigatingCancelEventArgs e)
         {
-            var page = e.Content as TransitionPage;
-            if (page != null)
+            //var page = e.Content as TransitionPage;
+            var content = this.Content as TransitionPage;
+
+            if (content != null)
             {
-                this.back = page.NavigationDirection == NavigationDirection.Previous;
+                Debug.WriteLine(content.NavigationDirection);
+                this.back = content.NavigationDirection == NavigationDirection.Previous;
             }
+
+            //if (page != null)
+            //{
+            //    this.back = page.NavigationDirection == NavigationDirection.Previous;
+            //}
         }
         
         public override void OnApplyTemplate()

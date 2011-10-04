@@ -5,11 +5,16 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:views="clr-namespace:KinectLevelUp.CustomSwipe.Views"
       mc:Ignorable="d" 
-      NavigationDirection="{Binding NavigationDirection, Source={StaticResource loader}}"
+      NavigationDirection="{Binding Main.NavigationDirection, Source={StaticResource loader}}"
       d:DesignHeight="300" d:DesignWidth="300"
 	Title="Page3">
 
-    <Grid>
-        <TextBlock Text="Page 3"/>
+    <Grid Background="#C1552A">
+        <TextBlock 
+            Foreground="White"
+            FontSize="40"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="Page 3"/>
     </Grid>
 </views:TransitionPage>

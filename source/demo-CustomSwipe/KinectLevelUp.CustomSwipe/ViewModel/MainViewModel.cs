@@ -1,7 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
-using KinectLevelUp.CustomSwipe.Services;
+using System.Windows.Input;
 using KinectLevelUp.CustomSwipe.Infrastructure;
+using KinectLevelUp.CustomSwipe.Services;
 
 namespace KinectLevelUp.CustomSwipe.ViewModel
 {
@@ -15,12 +16,18 @@ namespace KinectLevelUp.CustomSwipe.ViewModel
 
         public MainViewModel(IKinectService kinectService)
         {
+            this.PreviousCommand = new RelayCommand(this.ExecutePreviousCommand);
+            this.NextCommand = new RelayCommand(this.ExecuteNextCommand);
+
             this.kinectService = kinectService;
             this.kinectService.SwipeDetected += new EventHandler<SwipeEventArgs>(kinectService_SwipeDetected);
 
             this.index = 1;
             this.FrameSource = this.GetPageUri(this.index);
         }
+
+        public ICommand PreviousCommand { get; private set; }
+        public ICommand NextCommand { get; private set; }
 
         const string FrameSourceProperty = "FrameSource";
         string frameSource;
@@ -60,10 +67,10 @@ namespace KinectLevelUp.CustomSwipe.ViewModel
 
         void GoToNextPage()
         {
-            if (this.index > 1)
+            if (this.index < 3)
             {
                 this.NavigationDirection = NavigationDirection.Next;
-                this.index--;
+                this.index++;
                 var uri = this.GetPageUri(this.index);
                 this.FrameSource = uri;
             }
@@ -71,10 +78,10 @@ namespace KinectLevelUp.CustomSwipe.ViewModel
 
         void GoToPreviousPage()
         {
-            if (this.index < 3)
+            if (this.index > 1)
             {
                 this.NavigationDirection = NavigationDirection.Previous;
-                this.index++;
+                this.index--;
                 var uri = this.GetPageUri(this.index);
                 this.FrameSource = uri;
             }
@@ -92,6 +99,16 @@ namespace KinectLevelUp.CustomSwipe.ViewModel
                 this.PropertyChanged(this,
                     new PropertyChangedEventArgs(property));
             }
+        }
+
+        void ExecutePreviousCommand()
+        {
+            this.GoToPreviousPage();
+        }
+
+        void ExecuteNextCommand()
+        {
+            this.GoToNextPage();
         }
 
         public void Cleanup()
