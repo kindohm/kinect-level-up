@@ -16,5 +16,7 @@ namespace KinectLevelUp.ProportionalMenu.Services
         }
 
         public event EventHandler<SkeletonUpdatedEventArgs> SkeletonUpdated;
+        public event EventHandler<SwipeEventArgs> SwipeDetected;
+
     }
 }

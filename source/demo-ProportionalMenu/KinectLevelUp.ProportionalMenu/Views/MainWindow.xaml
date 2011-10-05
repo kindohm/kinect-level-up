@@ -4,6 +4,11 @@
         DataContext="{Binding Main, Source={StaticResource Locator}}"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
+        <TextBlock
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontSize="20"
+            Text="{Binding ItemMessageText}"/>
         <Grid
             Background="#EEEEEE"
             Width="200"

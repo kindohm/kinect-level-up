@@ -1,5 +1,8 @@
-﻿using System.Windows.Media;
+﻿using System;
+using System.Windows.Media;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace KinectLevelUp.ProportionalMenu.ViewModel
 {
@@ -11,7 +14,14 @@ namespace KinectLevelUp.ProportionalMenu.ViewModel
         public MenuItemViewModel()
         {
             this.ItemBrush = MenuItemViewModel.DefaultBrush;
+            this.ItemCommand = new RelayCommand(new Action(() =>
+            {
+                Messenger.Default.Send<ItemMessage>(
+                    new ItemMessage() { Text = this.Name + " selected!" });
+            }));
         }
+
+        public RelayCommand ItemCommand { get; private set; }
 
         public const string IsSelectedPropertyName = "IsSelected";
         bool isSelected = false;

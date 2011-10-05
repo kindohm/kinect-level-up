@@ -82,10 +82,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Services\Extensions.cs" />
+    <Compile Include="Services\HorizontalSwipe.cs" />
     <Compile Include="Services\IKinectService.cs" />
     <Compile Include="Services\KinectService.cs" />
     <Compile Include="Services\MockKinectService.cs" />
     <Compile Include="Services\SkeletonUpdatedEventArgs.cs" />
+    <Compile Include="Services\SwipeDirection.cs" />
+    <Compile Include="Services\SwipeEventArgs.cs" />
+    <Compile Include="ViewModel\ItemMessage.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MenuItemViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
