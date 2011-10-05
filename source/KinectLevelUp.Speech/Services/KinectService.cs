@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Microsoft.Research.Kinect.Audio;
-using Microsoft.Speech.Recognition;
-using Microsoft.Research.Kinect.Nui;
-using Microsoft.Speech.AudioFormat;
 using System.Threading;
+using Microsoft.Research.Kinect.Audio;
+using Microsoft.Speech.AudioFormat;
+using Microsoft.Speech.Recognition;
 
 namespace KinectLevelUp.Speech.Services
 {
@@ -34,7 +31,9 @@ namespace KinectLevelUp.Speech.Services
                 this.grammar = newGrammar;
 
                 if ((speechRecognitionEngine != null) && (speechRecognitionEngine.Grammars.Count == 1))
-                    throw new InvalidOperationException("Only 1 grammar is supported in this release.");
+                {
+                    throw new NotSupportedException("Only 1 grammar is supported in this release.");
+                }
 
                 var recognizer = SpeechRecognitionEngine.InstalledRecognizers()
                     .Where(x => x.Id == KinectSpeechRecognizer).FirstOrDefault();
@@ -48,7 +47,6 @@ namespace KinectLevelUp.Speech.Services
 
                 var g = ConvertToGrammar(grammar);
                 speechRecognitionEngine.LoadGrammar(g);
-
                 speechRecognitionEngine.SpeechDetected += new EventHandler<SpeechDetectedEventArgs>(speechRecognitionEngine_SpeechDetected);
                 speechRecognitionEngine.SpeechRecognitionRejected += new EventHandler<SpeechRecognitionRejectedEventArgs>(speechRecognitionEngine_SpeechRecognitionRejected);
                 speechRecognitionEngine.SpeechRecognized += new EventHandler<Microsoft.Speech.Recognition.SpeechRecognizedEventArgs>(speechRecognitionEngine_SpeechRecognized);
@@ -80,30 +78,25 @@ namespace KinectLevelUp.Speech.Services
             }
         }
 
-        Grammar ConvertToGrammar(NuiGrammar grammar)
+        Grammar ConvertToGrammar(NuiGrammar nuiGrammar)
         {
 
-            Grammar g = null;
-            switch (grammar.GrammarType)
+            if (nuiGrammar.GrammarType == NuiGrammar.NuiGrammarType.Basic)
             {
-                case NuiGrammar.NuiGrammarType.Basic:
-                    var choices = new Choices();
-                    foreach (var item in grammar.Items)
-                    {
-                        choices.Add(item.Text);
-                    }
-                    var gb = new GrammarBuilder();
-                    gb.Culture = speechRecognitionEngine.RecognizerInfo.Culture;
-                    gb.Append(choices);
-                    g = new Grammar(gb);
-                    break;
-
-                case NuiGrammar.NuiGrammarType.Srgs:
-                    throw new NotImplementedException();
-                    break;
+                var choices = new Choices();
+                foreach (var item in nuiGrammar.Items)
+                {
+                    choices.Add(item.Text);
+                }
+                var builder = new GrammarBuilder();
+                builder.Culture = speechRecognitionEngine.RecognizerInfo.Culture;
+                builder.Append(choices);
+                var grammar = new Grammar(builder);
+                return grammar;
             }
+            throw new NotSupportedException(
+                "Anything other than Basic grammar type is not supported.");
 
-            return g;
         }
 
         void speechRecognitionEngine_SpeechRecognized(object sender, Microsoft.Speech.Recognition.SpeechRecognizedEventArgs e)
