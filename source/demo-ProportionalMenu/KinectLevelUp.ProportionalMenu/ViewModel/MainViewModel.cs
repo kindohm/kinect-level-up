@@ -1,7 +1,11 @@
+using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Threading;
+using System.Windows.Media.Imaging;
+using Coding4Fun.Kinect.Wpf;
 using GalaSoft.MvvmLight;
 using KinectLevelUp.ProportionalMenu.Services;
-using System;
 
 namespace KinectLevelUp.ProportionalMenu.ViewModel
 {
@@ -9,6 +13,7 @@ namespace KinectLevelUp.ProportionalMenu.ViewModel
     {
         IKinectService kinectService;
         MenuItemViewModel selectedItem;
+        BackgroundWorker imageWorker;
 
         public MainViewModel(IKinectService kinectService)
         {
@@ -16,9 +21,34 @@ namespace KinectLevelUp.ProportionalMenu.ViewModel
             this.kinectService.SkeletonUpdated += new System.EventHandler<SkeletonUpdatedEventArgs>(kinectService_SkeletonUpdated);
             this.MenuItems = new ObservableCollection<MenuItemViewModel>();
             this.LoadMenuItems();
+
+            this.imageWorker = new BackgroundWorker();
+            this.imageWorker.DoWork += new DoWorkEventHandler(imageWorker_DoWork);
+            this.imageWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(imageWorker_RunWorkerCompleted);
+            this.imageWorker.RunWorkerAsync();
         }
 
         public ObservableCollection<MenuItemViewModel> MenuItems { get; private set; }
+
+        public const string DepthImagePropertyName = "DepthImage";
+        BitmapSource depthImage = null;
+        public BitmapSource DepthImage
+        {
+            get
+            {
+                return depthImage;
+            }
+            set
+            {
+                if (depthImage == value)
+                {
+                    return;
+                }
+                var oldValue = depthImage;
+                depthImage = value;
+                RaisePropertyChanged(DepthImagePropertyName);
+            }
+        }
 
         public override void Cleanup()
         {
@@ -55,6 +85,17 @@ namespace KinectLevelUp.ProportionalMenu.ViewModel
             }
         }
 
+        void imageWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            this.imageWorker.RunWorkerAsync();
+        }
+
+        void imageWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            Thread.Sleep(20);
+            this.DepthImage = this.kinectService.LastDepthFrame.ToBitmapSource();
+        }
+        
         void LoadMenuItems()
         {
             for (var i = 0; i < 4; i++)

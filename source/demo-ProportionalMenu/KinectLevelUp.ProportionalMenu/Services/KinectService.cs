@@ -14,14 +14,25 @@ namespace KinectLevelUp.ProportionalMenu.Services
             try
             {
                 this.runtime = new Runtime();
+                this.runtime.DepthFrameReady += new EventHandler<ImageFrameReadyEventArgs>(runtime_DepthFrameReady);
                 this.runtime.SkeletonFrameReady += new EventHandler<SkeletonFrameReadyEventArgs>(
                     runtime_SkeletonFrameReady);
-                this.runtime.Initialize(RuntimeOptions.UseSkeletalTracking);
+                this.runtime.Initialize(RuntimeOptions.UseSkeletalTracking | RuntimeOptions.UseDepth);
+                runtime.DepthStream.Open(
+                    ImageStreamType.Depth, 2, ImageResolution.Resolution320x240, ImageType.DepthAndPlayerIndex);
             }
             catch (InvalidOperationException opEx)
             {
                 // s'ok
             }
+        }
+
+
+        public ImageFrame LastDepthFrame { get; private set; }
+
+        void runtime_DepthFrameReady(object sender, ImageFrameReadyEventArgs e)
+        {
+            this.LastDepthFrame = e.ImageFrame;
         }
 
         void runtime_SkeletonFrameReady(object sender, SkeletonFrameReadyEventArgs e)

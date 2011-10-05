@@ -27,5 +27,12 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </Grid>
+        
+        <Image
+            Width="200"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Source="{Binding DepthImage}"/>
+        
     </Grid>
 </Window>
