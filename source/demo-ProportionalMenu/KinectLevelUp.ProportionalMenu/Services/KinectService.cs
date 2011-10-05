@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.Research.Kinect.Nui;
+using System.Diagnostics;
+using System.Windows;
 
 namespace KinectLevelUp.ProportionalMenu.Services
 {
@@ -23,6 +25,7 @@ namespace KinectLevelUp.ProportionalMenu.Services
             }
             catch (InvalidOperationException opEx)
             {
+                MessageBox.Show("Kinect no worky.");
                 // s'ok
             }
         }

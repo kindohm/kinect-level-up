@@ -1,5 +1,6 @@
 
 using KinectLevelUp.ProportionalMenu.Services;
+using GalaSoft.MvvmLight;
 
 namespace KinectLevelUp.ProportionalMenu.ViewModel
 {
@@ -10,7 +11,14 @@ namespace KinectLevelUp.ProportionalMenu.ViewModel
 
         public ViewModelLocator()
         {
-            kinectService = new KinectService();
+            if (ViewModelBase.IsInDesignModeStatic)
+            {
+                kinectService = new MockKinectService();
+            }
+            else
+            {
+                kinectService = new KinectService();
+            }
             main = new MainViewModel(kinectService);
         }
 

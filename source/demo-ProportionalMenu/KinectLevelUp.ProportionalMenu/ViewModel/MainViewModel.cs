@@ -6,6 +6,7 @@ using System.Windows.Media.Imaging;
 using Coding4Fun.Kinect.Wpf;
 using GalaSoft.MvvmLight;
 using KinectLevelUp.ProportionalMenu.Services;
+using System.Diagnostics;
 
 namespace KinectLevelUp.ProportionalMenu.ViewModel
 {
@@ -68,10 +69,15 @@ namespace KinectLevelUp.ProportionalMenu.ViewModel
                 )
             {
                 // adjust Y values so that shoulder is at zero of y axis
-                var hand = Math.Abs(e.HandRight.Position.Y - e.ShoulderRight.Position.Y);
-                var hip = Math.Abs(e.HipRight.Position.Y - e.ShoulderRight.Position.Y);
+                var hand = (int)Math.Abs(e.HandRight.Position.Y - e.ShoulderRight.Position.Y);
+                var hip = (int)Math.Abs(e.HipRight.Position.Y - e.ShoulderRight.Position.Y);
 
                 var remainder = (int)(hand % hip);
+
+                Debug.WriteLine(
+                    string.Format("Hand: {0}, Hip: {1}, Remainder: {2}",
+                    hand, hip, remainder));
+
                 this.selectedItem = this.MenuItems[remainder];
                 this.selectedItem.IsSelected = true;
             }
@@ -93,9 +99,12 @@ namespace KinectLevelUp.ProportionalMenu.ViewModel
         void imageWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             Thread.Sleep(20);
-            this.DepthImage = this.kinectService.LastDepthFrame.ToBitmapSource();
+            if (this.kinectService != null && this.kinectService.LastDepthFrame != null)
+            {
+                this.DepthImage = this.kinectService.LastDepthFrame.ToBitmapSource();
+            }
         }
-        
+
         void LoadMenuItems()
         {
             for (var i = 0; i < 4; i++)

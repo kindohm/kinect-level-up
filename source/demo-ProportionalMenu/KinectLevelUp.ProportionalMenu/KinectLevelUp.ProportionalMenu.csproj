@@ -84,6 +84,7 @@
     </Compile>
     <Compile Include="Services\IKinectService.cs" />
     <Compile Include="Services\KinectService.cs" />
+    <Compile Include="Services\MockKinectService.cs" />
     <Compile Include="Services\SkeletonUpdatedEventArgs.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MenuItemViewModel.cs" />
