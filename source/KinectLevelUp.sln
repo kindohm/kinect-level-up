@@ -21,6 +21,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "demo-ProportionalMenu", "de
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KinectLevelUp.ProportionalMenu", "demo-ProportionalMenu\KinectLevelUp.ProportionalMenu\KinectLevelUp.ProportionalMenu.csproj", "{EF273ECD-3C25-4ACA-B6BB-424EEF6BED94}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "demo-speech", "demo-speech", "{F2E79541-3E59-4476-9977-F19C8D5FE991}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KinectLevelUp.Speech", "KinectLevelUp.Speech\KinectLevelUp.Speech.csproj", "{9ACB3B46-805F-4F17-A8A1-13A5EB58FBA2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -47,6 +51,10 @@ Global
 		{EF273ECD-3C25-4ACA-B6BB-424EEF6BED94}.Debug|x86.Build.0 = Debug|x86
 		{EF273ECD-3C25-4ACA-B6BB-424EEF6BED94}.Release|x86.ActiveCfg = Release|x86
 		{EF273ECD-3C25-4ACA-B6BB-424EEF6BED94}.Release|x86.Build.0 = Release|x86
+		{9ACB3B46-805F-4F17-A8A1-13A5EB58FBA2}.Debug|x86.ActiveCfg = Debug|x86
+		{9ACB3B46-805F-4F17-A8A1-13A5EB58FBA2}.Debug|x86.Build.0 = Debug|x86
+		{9ACB3B46-805F-4F17-A8A1-13A5EB58FBA2}.Release|x86.ActiveCfg = Release|x86
+		{9ACB3B46-805F-4F17-A8A1-13A5EB58FBA2}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,5 +65,6 @@ Global
 		{FB71E92F-13E7-45F3-9ABD-1DCBD463DA8B} = {C1511B61-D5CD-4E45-A092-589C2025487A}
 		{1939C96F-64A2-4338-BC4B-96A6512D867E} = {731CFF52-9BB5-454C-9D86-AD972A47307C}
 		{EF273ECD-3C25-4ACA-B6BB-424EEF6BED94} = {EA7B39B8-021B-43B3-9BAC-AB8F147E3080}
+		{9ACB3B46-805F-4F17-A8A1-13A5EB58FBA2} = {F2E79541-3E59-4476-9977-F19C8D5FE991}
 	EndGlobalSection
 EndGlobal
